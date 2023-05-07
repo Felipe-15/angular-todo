@@ -7,12 +7,13 @@ import { Task } from '../../model/task';
   styleUrls: ['./todo-list.component.sass'],
 })
 export class TodoListComponent implements DoCheck {
-  taskList: Task[] = [];
+  taskList: Task[] = JSON.parse(localStorage.getItem('list') || '[]');
 
   ngDoCheck(): void {
     this.taskList.sort(
       (first, last) => Number(first.checked) - Number(last.checked)
     );
+    localStorage.setItem('list', JSON.stringify(this.taskList));
   }
 
   deleteTask(taskIndex: number): void {
