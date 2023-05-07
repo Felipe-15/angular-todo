@@ -13,7 +13,9 @@
     </li>
   </ul>
 </section>
-<app-todo-input-add-items></app-todo-input-add-items>
+<app-todo-input-add-items
+  (emitAddTask)="onAddTask($event)"
+></app-todo-input-add-items>
 <app-todo-button-delete-all
   (click)="deleteAll()"
   *ngIf="taskList.length"

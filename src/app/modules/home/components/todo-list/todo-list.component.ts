@@ -7,7 +7,7 @@ import { Task } from '../../model/task';
   styleUrls: ['./todo-list.component.sass'],
 })
 export class TodoListComponent implements OnInit {
-  taskList: Task[] = [{ checked: true, text: 'Primeira task' }];
+  taskList: Task[] = [];
 
   deleteTask(taskIndex: number): void {
     this.taskList.splice(taskIndex, 1);
@@ -20,6 +20,10 @@ export class TodoListComponent implements OnInit {
     if (confirm) {
       this.taskList = [];
     }
+  }
+
+  onAddTask(task: Task): void {
+    this.taskList.push(task);
   }
 
   ngOnInit(): void {}
