@@ -10,6 +10,8 @@ export class TodoInputAddItemsComponent {
   @Output() emitAddTask = new EventEmitter<Task>();
   taskText = '';
   addTask(): void {
+    if (!this.taskText.trim()) return;
+
     this.emitAddTask.emit({ checked: false, text: this.taskText });
     this.taskText = '';
   }
