@@ -3,7 +3,7 @@
     <li *ngFor="let task of taskList; let i = index">
       <input type="checkbox" [(ngModel)]="task.checked" />
       <input
-        [ngClass]="task.checked ? 'checked' : ''"
+        [ngClass]="{ checked: task.checked }"
         type="text"
         [(ngModel)]="task.text"
       />

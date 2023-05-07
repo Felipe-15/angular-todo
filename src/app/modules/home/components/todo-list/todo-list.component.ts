@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Task } from '../../model/task';
 
 @Component({
@@ -6,8 +6,14 @@ import { Task } from '../../model/task';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.sass'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements DoCheck {
   taskList: Task[] = [];
+
+  ngDoCheck(): void {
+    this.taskList.sort(
+      (first, last) => Number(first.checked) - Number(last.checked)
+    );
+  }
 
   deleteTask(taskIndex: number): void {
     this.taskList.splice(taskIndex, 1);
@@ -26,5 +32,15 @@ export class TodoListComponent implements OnInit {
     this.taskList.push(task);
   }
 
-  ngOnInit(): void {}
+  inputValidation(task: string, index: number): void {
+    if (task.length) return;
+
+    const confirm = window.confirm(
+      'Are you sure you want to delete this blank task?'
+    );
+
+    if (confirm) {
+      this.deleteTask(index);
+    }
+  }
 }
